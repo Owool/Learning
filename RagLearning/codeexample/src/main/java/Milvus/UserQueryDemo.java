@@ -28,6 +28,7 @@ public class UserQueryDemo {
                 .outputFields(List.of("chunk_text", "doc_id", "category"))  // 需要返回的字段
                 .annsField("vector")          // 指定在哪个向量字段上检索
                 .searchParams(Map.of("ef", 128))  // HNSW 检索时的搜索宽度
+                .filter("category == \"return_policy\"")
                 .build();
         SearchResp searchResp = client.search(searchReq);
         // 输出检索结果
