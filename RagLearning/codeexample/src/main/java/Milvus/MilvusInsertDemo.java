@@ -1,3 +1,5 @@
+package Milvus;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -18,11 +20,7 @@ public class MilvusInsertDemo {
     private static final OkHttpClient HTTP_CLIENT = new OkHttpClient();
 
     public static void main(String[] args) throws IOException {
-        ConnectConfig connectConfig = ConnectConfig.builder()
-                .uri("http://localhost:19530")
-                .build();
-
-        MilvusClientV2 client = new MilvusClientV2(connectConfig);
+        MilvusClientV2 client = MilvusClient.getInstance();
 
         // 模拟电商客服知识库的 chunk 数据
         List<String> chunkTexts = List.of(
@@ -53,6 +51,7 @@ public class MilvusInsertDemo {
                 .build();
         InsertResp insertResp = client.insert(insertReq);
         System.out.println("插入成功，数量：" + insertResp.getInsertCnt());
+        client.close();
     }
     private static List<List<Float>> getEmbeddings(List<String> texts) throws IOException{
         JsonObject requestBody = new JsonObject();

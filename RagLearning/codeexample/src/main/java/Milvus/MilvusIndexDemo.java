@@ -1,3 +1,5 @@
+package Milvus;
+
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.IndexParam;
@@ -7,12 +9,7 @@ import java.util.*;
 
 public class MilvusIndexDemo {
     public static void main(String[] args) {
-        ConnectConfig connectConfig = ConnectConfig.builder()
-                .uri("http://localhost:19530")
-                .build();
-
-        MilvusClientV2 client = new MilvusClientV2(connectConfig);
-
+        MilvusClientV2 client = MilvusClient.getInstance();
         IndexParam vectorIndex = IndexParam.builder()
                 .fieldName("vector")
                 .indexType(IndexParam.IndexType.HNSW)

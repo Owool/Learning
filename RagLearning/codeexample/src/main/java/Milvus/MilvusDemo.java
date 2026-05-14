@@ -1,3 +1,5 @@
+package Milvus;
+
 import io.milvus.v2.client.ConnectConfig;
 import io.milvus.v2.client.MilvusClientV2;
 import io.milvus.v2.common.DataType;
@@ -10,11 +12,7 @@ public class MilvusDemo {
 
     public static void main(String[] args) {
         //连接配置
-        ConnectConfig connectConfig = ConnectConfig.builder()
-                .uri("http://localhost:19530")
-                .build();
-
-        MilvusClientV2 client = new MilvusClientV2(connectConfig);
+        MilvusClientV2 client = MilvusClient.getInstance();
 
         //定义schema
         CreateCollectionReq.CollectionSchema schema = client.createSchema();
@@ -61,5 +59,6 @@ public class MilvusDemo {
 
         client.createCollection(createCollectionReq);
         System.out.println("Collection 创建成功：" + COLLECTION_NAME);
+        client.close();
     }
 }
