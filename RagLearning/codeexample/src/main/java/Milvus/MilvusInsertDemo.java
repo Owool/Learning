@@ -53,7 +53,7 @@ public class MilvusInsertDemo {
         System.out.println("插入成功，数量：" + insertResp.getInsertCnt());
         client.close();
     }
-    private static List<List<Float>> getEmbeddings(List<String> texts) throws IOException{
+    static List<List<Float>> getEmbeddings(List<String> texts) throws IOException{
         JsonObject requestBody = new JsonObject();
         requestBody.addProperty("model",EMBEDDING_MODEL);
         requestBody.add("input",GSON.toJsonTree(texts));
